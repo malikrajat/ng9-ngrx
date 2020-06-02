@@ -20,7 +20,7 @@ export const initialState: UserState = adapter.getInitialState({
 const _userReducer = createReducer(
   initialState,
   on(UserActions.loadUsersSuccess, (state, action) =>
-    adapter.setAll(action.users, state)
+    adapter.addAll(action.users, state)
   ),
   on(UserActions.loadUsersFailure, (state, action) => {
     return {
