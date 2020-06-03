@@ -19,6 +19,13 @@ export class UserService {
       .get<User[]>(this._baseUrl)
       .pipe(catchError(this.handleError));
   }
+
+  public addUser(user: User): Observable<User> {
+    return this._http
+      .post<User>(this._baseUrl, user)
+      .pipe(catchError(this.handleError));
+  }
+
   handleError(error: HttpErrorResponse) {
     let errorMessage = 'Unknown error!';
     if (error.error instanceof ErrorEvent) {

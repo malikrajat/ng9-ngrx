@@ -1,17 +1,19 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserState } from '../store/user.reducer';
+import { Store } from '@ngrx/store';
+import { addUser } from '../store/user.actions';
 
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',
-  styles: [],
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class AddUserComponent implements OnInit {
   addUser: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private _store: Store<UserState>) {}
 
   ngOnInit(): void {
     this.addUser = this.fb.group({
@@ -27,7 +29,7 @@ export class AddUserComponent implements OnInit {
           Validators.required,
           Validators.minLength(10),
           Validators.maxLength(10),
-          Validators.pattern('[0-9]{0-10}'),
+          // Validators.pattern('[0-9]{0-10}'),
         ],
       ],
       website: ['', [Validators.required, Validators.minLength(6)]],
@@ -55,7 +57,13 @@ export class AddUserComponent implements OnInit {
       }),
     });
   }
-  registerNewUser() {}
+  registerNewUser() {
+    this.submitted = true;
+    if (this.addUser.invalid) {
+      return;
+    }
+    this._store.dispatch(addUser({ user: this.addUser.value }));
+  }
   get f() {
     return this.addUser.controls;
   }

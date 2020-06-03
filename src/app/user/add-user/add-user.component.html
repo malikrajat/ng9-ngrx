@@ -105,6 +105,9 @@
       <div *ngIf="f.phone.errors.maxlength">
         phone must be max to 10 number
       </div>
+      <!-- <div *ngIf="f.phone.errors.pattern">
+        Plase enter valid phone number
+      </div> -->
     </div>
   </div>
 
@@ -318,9 +321,9 @@
       GEO
 
       <div class="form-group">
-        <label for="formGroupExampleInput2">zipcode</label>
+        <label for="formGroupExampleInput2">lat</label>
         <input
-          type="number"
+          type="text"
           formControlName="lat"
           name="lat"
           class="form-control"

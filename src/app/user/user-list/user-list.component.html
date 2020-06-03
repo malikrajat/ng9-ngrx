@@ -7,6 +7,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Phone</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -15,6 +16,17 @@
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
         <td>{{ user.phone }}</td>
+        <td>
+          <button type="button" class="btn btn-primary">Edit</button>
+          &nbsp;&nbsp;&nbsp;
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deleteUser(user.id)"
+          >
+            Delete
+          </button>
+        </td>
       </tr>
     </tbody>
   </table>

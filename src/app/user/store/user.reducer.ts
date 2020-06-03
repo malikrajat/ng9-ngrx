@@ -19,10 +19,21 @@ export const initialState: UserState = adapter.getInitialState({
 
 const _userReducer = createReducer(
   initialState,
+  // load users
   on(UserActions.loadUsersSuccess, (state, action) =>
     adapter.addAll(action.users, state)
   ),
   on(UserActions.loadUsersFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+    };
+  }),
+  // add user
+  on(UserActions.addUserSuccess, (state, action) =>
+    adapter.addOne(action.user, state)
+  ),
+  on(UserActions.addUsersFailure, (state, action) => {
     return {
       ...state,
       error: action.error,

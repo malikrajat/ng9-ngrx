@@ -12,14 +12,18 @@ import { loadUsersList } from '../store/user.selectors';
   changeDetection: ChangeDetectionStrategy.Default,
 })
 export class UserListComponent implements OnInit {
-  users$: Observable<User[]>;
+  public users$: Observable<User[]>;
   constructor(private _store: Store<UserState>) {}
 
   ngOnInit(): void {
     this._store.dispatch(loadUsers());
     this.loadUsers();
   }
-  loadUsers() {
+  private loadUsers(): void {
     this.users$ = this._store.pipe(select(loadUsersList));
+  }
+  public deleteUser(userId: number): void {
+    if (window.confirm('Are sure you want to delete this item ?')) {
+    }
   }
 }
