@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { UserRoutingModule } from './user-routing.module';
 import { UserListComponent } from './user-list/user-list.component';
@@ -15,6 +16,8 @@ import { UserService } from './user.service';
   declarations: [UserListComponent, AddUserComponent, EditUserComponent],
   imports: [
     CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
     UserRoutingModule,
     StoreModule.forFeature(fromUser.usersFeatureKey, fromUser.reducer),
     EffectsModule.forFeature([UserEffects]),

@@ -5,26 +5,25 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () =>
-      import('./user/user.module').then((user) => user.UserModule),
+    redirectTo: '/user',
   },
   {
     path: 'user',
-    pathMatch: 'full',
+
     loadChildren: () =>
       import('./user/user.module').then((user) => user.UserModule),
   },
   {
     path: 'post',
-    pathMatch: 'full',
+
     loadChildren: () =>
       import('./post/post.module').then((post) => post.PostModule),
   },
-  {
-    path: '**',
-    loadChildren: () =>
-      import('./user/user.module').then((user) => user.UserModule),
-  },
+  // {
+  //   path: '**',
+  //   pathMatch: 'full',
+  //   redirectTo: '/user',
+  // },
 ];
 
 @NgModule({

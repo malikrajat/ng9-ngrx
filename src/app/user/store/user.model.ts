@@ -3,6 +3,8 @@ export interface User {
   name: string;
   username: string;
   email: string;
+  phone: number;
+  website: string;
   address: {
     street: string;
     suite: string;
@@ -13,8 +15,6 @@ export interface User {
       lng: number;
     };
   };
-  phone: number;
-  website: string;
   company: {
     name: string;
     catchPhrase: string;
