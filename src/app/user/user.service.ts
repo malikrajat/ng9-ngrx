@@ -12,6 +12,15 @@ export class UserService {
   constructor(private _http: HttpClient) {}
 
   /**
+   * getUser
+   */
+  public getUser(id: string | number): Observable<User> {
+    return this._http
+      .get<User>(this._baseUrl + id)
+      .pipe(catchError(this.handleError));
+  }
+
+  /**
    * getUsers
    */
   public getUsers(): Observable<User[]> {
@@ -23,6 +32,15 @@ export class UserService {
   public addUser(user: User): Observable<User> {
     return this._http
       .post<User>(this._baseUrl, user)
+      .pipe(catchError(this.handleError));
+  }
+
+  public editUser(
+    id: string | number,
+    changes: Partial<User>
+  ): Observable<User> {
+    return this._http
+      .put<User>(this._baseUrl + id, changes)
       .pipe(catchError(this.handleError));
   }
 

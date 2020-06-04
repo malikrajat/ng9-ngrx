@@ -8,6 +8,7 @@ export const usersFeatureKey = 'users';
 export interface UserState extends EntityState<User> {
   // additional entities state properties
   error: any;
+  selectedUser: User;
 }
 
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
@@ -15,10 +16,25 @@ export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
 export const initialState: UserState = adapter.getInitialState({
   // additional entity state properties
   error: undefined,
+  selectedUser: undefined,
 });
 
 const _userReducer = createReducer(
   initialState,
+  // Load Single Users
+  on(UserActions.loadUserSuccess, (state, action) => {
+    return {
+      ...state,
+      selectedUser: action.selectedUser,
+    };
+  }),
+  on(UserActions.loadUsersFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+    };
+  }),
+
   // load users
   on(UserActions.loadUsersSuccess, (state, action) =>
     adapter.addAll(action.users, state)
@@ -44,6 +60,17 @@ const _userReducer = createReducer(
     adapter.removeOne(action.id, state)
   ),
   on(UserActions.deleteUsersFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+    };
+  }),
+
+  // edit user
+  on(UserActions.editUserSuccess, (state, action) =>
+    adapter.updateOne(action.user, state)
+  ),
+  on(UserActions.editUsersFailure, (state, action) => {
     return {
       ...state,
       error: action.error,

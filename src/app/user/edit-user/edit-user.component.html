@@ -1,1 +1,390 @@
-<p>edit-user works!</p>
+<form
+  [formGroup]="editUser"
+  (ngSubmit)="updateUser()"
+  style="margin: 0 397px 120px;"
+>
+  <div class="form-group">
+    <label for="formGroupExampleInput">Email</label>
+    <input
+      type="email"
+      formControlName="email"
+      name="email"
+      class="form-control"
+      placeholder="Email"
+    />
+
+    <div
+      *ngIf="f.email.errors && (f.email.dirty || f.email.touched)"
+      class="error"
+    >
+      <div *ngIf="f.email.errors.required">Email is required</div>
+      <div *ngIf="f.email.errors.email">
+        Email must be a valid email address
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Name</label>
+    <input
+      type="text"
+      formControlName="name"
+      name="name"
+      class="form-control"
+      placeholder="Name"
+    />
+
+    <div
+      *ngIf="f.name.errors && (f.name.dirty || f.name.touched)"
+      class="error"
+    >
+      <div *ngIf="f.name.errors.required">name is required</div>
+      <div *ngIf="f.name.errors.minlength">
+        name must be at least 6 characters
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="formGroupExampleInput2">User Name</label>
+    <input
+      type="text"
+      formControlName="username"
+      name="username"
+      class="form-control"
+      placeholder="user name"
+    />
+    <div
+      *ngIf="f.username.errors && (f.username.dirty || f.username.touched)"
+      class="error"
+    >
+      <div *ngIf="f.username.errors.required">user name is required</div>
+      <div *ngIf="f.username.errors.minlength">
+        user name must be at least 6 characters
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Website</label>
+    <input
+      type="url"
+      formControlName="website"
+      name="website"
+      class="form-control"
+      placeholder="website"
+    />
+    <div
+      *ngIf="f.website.errors && (f.website.dirty || f.website.touched)"
+      class="error"
+    >
+      <div *ngIf="f.website.errors.required">Website is required</div>
+      <div *ngIf="f.website.errors.minlength">
+        Website must be at least 6 characters
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Mobile</label>
+    <input
+      type="tel"
+      formControlName="phone"
+      name="phone"
+      class="form-control"
+      placeholder="phone"
+    />
+    <div
+      *ngIf="f.phone.errors && (f.phone.dirty || f.phone.touched)"
+      class="error"
+    >
+      <div *ngIf="f.phone.errors.required">phone is required</div>
+      <div *ngIf="f.phone.errors.minlength">
+        phone must be at least 10 number
+      </div>
+      <div *ngIf="f.phone.errors.maxlength">
+        phone must be max to 10 number
+      </div>
+      <!-- <div *ngIf="f.phone.errors.pattern">
+        Plase enter valid phone number
+      </div> -->
+    </div>
+  </div>
+
+  <div formGroupName="company">
+    Company
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Name</label>
+      <input
+        type="text"
+        formControlName="name"
+        name="name"
+        class="form-control"
+        placeholder="name"
+      />
+      <div
+        *ngIf="
+          companyValidation('company', 'name').errors &&
+          (companyValidation('company', 'name').dirty ||
+            companyValidation('company', 'name').touched)
+        "
+        class="error"
+      >
+        <div *ngIf="companyValidation('company', 'name').hasError('required')">
+          name is required
+        </div>
+        <div *ngIf="companyValidation('company', 'name').hasError('minlength')">
+          name must be at least 6 number
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="formGroupExampleInput2">Catch Phrase</label>
+      <input
+        type="text"
+        formControlName="catchPhrase"
+        name="catchPhrase"
+        class="form-control"
+        placeholder="catchPhrase"
+      />
+      <div
+        *ngIf="
+          companyValidation('company', 'catchPhrase').errors &&
+          (companyValidation('company', 'catchPhrase').dirty ||
+            companyValidation('company', 'catchPhrase').touched)
+        "
+        class="error"
+      >
+        <div
+          *ngIf="
+            companyValidation('company', 'catchPhrase').hasError('required')
+          "
+        >
+          catchPhrase is required
+        </div>
+        <div
+          *ngIf="
+            companyValidation('company', 'catchPhrase').hasError('minlength')
+          "
+        >
+          catchPhrase must be at least 6 number
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="formGroupExampleInput2">BS</label>
+      <input
+        type="text"
+        formControlName="bs"
+        name="bs"
+        class="form-control"
+        placeholder="bs"
+      />
+      <div
+        *ngIf="
+          companyValidation('company', 'bs').errors &&
+          (companyValidation('company', 'bs').dirty ||
+            companyValidation('company', 'bs').touched)
+        "
+        class="error"
+      >
+        <div *ngIf="companyValidation('company', 'bs').hasError('required')">
+          bs is required
+        </div>
+        <div *ngIf="companyValidation('company', 'bs').hasError('minlength')">
+          bs must be at least 6 number
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div formGroupName="address">
+    Address
+
+    <div class="form-group">
+      <label for="formGroupExampleInput2">street</label>
+      <input
+        type="text"
+        formControlName="street"
+        name="street"
+        class="form-control"
+        placeholder="street"
+      />
+      <div
+        *ngIf="
+          companyValidation('address', 'street').errors &&
+          (companyValidation('address', 'street').dirty ||
+            companyValidation('address', 'street').touched)
+        "
+        class="error"
+      >
+        <div
+          *ngIf="companyValidation('address', 'street').hasError('required')"
+        >
+          street is required
+        </div>
+        <div
+          *ngIf="companyValidation('address', 'street').hasError('minlength')"
+        >
+          street must be at least 6 number
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="formGroupExampleInput2">suite</label>
+      <input
+        type="text"
+        formControlName="suite"
+        name="suite"
+        class="form-control"
+        placeholder="suite"
+      />
+      <div
+        *ngIf="
+          companyValidation('address', 'suite').errors &&
+          (companyValidation('address', 'suite').dirty ||
+            companyValidation('address', 'suite').touched)
+        "
+        class="error"
+      >
+        <div *ngIf="companyValidation('address', 'suite').hasError('required')">
+          suite is required
+        </div>
+        <div
+          *ngIf="companyValidation('address', 'suite').hasError('minlength')"
+        >
+          suite must be at least 6 number
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="formGroupExampleInput2">city</label>
+      <input
+        type="text"
+        formControlName="city"
+        name="city"
+        class="form-control"
+        placeholder="city"
+      />
+      <div
+        *ngIf="
+          companyValidation('address', 'city').errors &&
+          (companyValidation('address', 'city').dirty ||
+            companyValidation('address', 'city').touched)
+        "
+        class="error"
+      >
+        <div *ngIf="companyValidation('address', 'city').hasError('required')">
+          city is required
+        </div>
+        <div *ngIf="companyValidation('address', 'city').hasError('minlength')">
+          city must be at least 6 number
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="formGroupExampleInput2">zipcode</label>
+      <input
+        type="number"
+        formControlName="zipcode"
+        name="zipcode"
+        class="form-control"
+        placeholder="zipcode"
+      />
+      <div
+        *ngIf="
+          companyValidation('address', 'zipcode').errors &&
+          (companyValidation('address', 'zipcode').dirty ||
+            companyValidation('address', 'zipcode').touched)
+        "
+        class="error"
+      >
+        <div
+          *ngIf="companyValidation('address', 'zipcode').hasError('required')"
+        >
+          zipcode is required
+        </div>
+        <div
+          *ngIf="companyValidation('address', 'zipcode').hasError('minlength')"
+        >
+          zipcode must be at least 6 number
+        </div>
+      </div>
+    </div>
+
+    <div formGroupName="geo">
+      GEO
+
+      <div class="form-group">
+        <label for="formGroupExampleInput2">lat</label>
+        <input
+          type="text"
+          formControlName="lat"
+          name="lat"
+          class="form-control"
+          placeholder="lat"
+        />
+        <div
+          *ngIf="
+            geoValidation('address', 'geo', 'lat').errors &&
+            (geoValidation('address', 'geo', 'lat').dirty ||
+              geoValidation('address', 'geo', 'lat').touched)
+          "
+          class="error"
+        >
+          <div
+            *ngIf="geoValidation('address', 'geo', 'lat').hasError('required')"
+          >
+            lat is required
+          </div>
+          <div
+            *ngIf="geoValidation('address', 'geo', 'lat').hasError('minlength')"
+          >
+            lat must be at least 6 number
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="formGroupExampleInput2">lng</label>
+        <input
+          type="text"
+          formControlName="lng"
+          name="lng"
+          class="form-control"
+          placeholder="lng"
+        />
+        <div
+          *ngIf="
+            geoValidation('address', 'geo', 'lng').errors &&
+            (geoValidation('address', 'geo', 'lng').dirty ||
+              geoValidation('address', 'geo', 'lng').touched)
+          "
+          class="error"
+        >
+          <div
+            *ngIf="geoValidation('address', 'geo', 'lng').hasError('required')"
+          >
+            lng is required
+          </div>
+          <div
+            *ngIf="geoValidation('address', 'geo', 'lng').hasError('minlength')"
+          >
+            lng must be at least 6 number
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!editUser.valid">
+    Update
+  </button>
+  &nbsp;&nbsp;&nbsp;
+  <button type="reset" class="btn btn-info">Reset</button>
+</form>

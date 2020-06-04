@@ -3,6 +3,20 @@ import { Update } from '@ngrx/entity';
 
 import { User } from './user.model';
 
+//Load Single User
+export const loadUser = createAction(
+  '[User Edit component] Load User',
+  props<{ id: string | number }>()
+);
+export const loadUserSuccess = createAction(
+  '[User List Effects] Load User success',
+  props<{ selectedUser: User }>()
+);
+export const loadUserFailure = createAction(
+  '[User List Effect] Load User Failure',
+  props<{ error: any }>()
+);
+
 // load users
 export const loadUsers = createAction('[User List component] Load Users');
 export const loadUsersSuccess = createAction(
@@ -39,5 +53,19 @@ export const deleteUserSuccess = createAction(
 );
 export const deleteUsersFailure = createAction(
   '[Delete User  Effect] Delete User Failure',
+  props<{ error: any }>()
+);
+
+// edit user
+export const editUser = createAction(
+  '[Edit User component] Edit  user',
+  props<{ user: Update<User> }>()
+);
+export const editUserSuccess = createAction(
+  '[Edit User  Effects] Edit User success',
+  props<{ user: Update<User> }>()
+);
+export const editUsersFailure = createAction(
+  '[Edit User  Effect] Edit User Failure',
   props<{ error: any }>()
 );

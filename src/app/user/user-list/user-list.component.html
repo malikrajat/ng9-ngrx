@@ -17,7 +17,7 @@
         <td>{{ user.email }}</td>
         <td>{{ user.phone }}</td>
         <td>
-          <button type="button" class="btn btn-primary">Edit</button>
+          <a class="btn btn-primary" [routerLink]="['edit', user.id]">Edit</a>
           &nbsp;&nbsp;&nbsp;
           <button
             type="button"

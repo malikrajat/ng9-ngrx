@@ -10,8 +10,13 @@ import {
   deleteUser,
   deleteUserSuccess,
   deleteUsersFailure,
+  editUser,
+  editUserSuccess,
+  loadUser,
+  loadUserSuccess,
+  loadUserFailure,
 } from './user.actions';
-import { mergeMap, map, catchError, tap } from 'rxjs/operators';
+import { mergeMap, map, catchError, tap, concatMap } from 'rxjs/operators';
 import { UserService } from '../user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { Router } from '@angular/router';
@@ -23,6 +28,19 @@ export class UserEffects {
     private userService: UserService,
     private router: Router
   ) {}
+
+  // load user
+  user$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(loadUser),
+      mergeMap((actions) =>
+        this.userService.getUser(actions.id).pipe(
+          map((user) => loadUserSuccess({ selectedUser: user })),
+          catchError((error) => of(loadUserFailure({ error })))
+        )
+      )
+    )
+  );
   // load users
   users$ = createEffect(() =>
     this.actions$.pipe(
@@ -49,7 +67,6 @@ export class UserEffects {
     )
   );
   // delete user
-  //addUser
   deleteUsers$ = createEffect(() =>
     this.actions$.pipe(
       ofType(deleteUser),
@@ -61,4 +78,17 @@ export class UserEffects {
       )
     )
   );
+  //edit user
+  //   editUsers$ = createEffect(() =>
+  //     this.actions$.pipe(
+  //       ofType(editUser),
+  //       concatMap((actions) =>
+  //         this.userService.editUser(actions.user.id, actions.user.changes).pipe(
+  //           map(() => editUserSuccess({ id: actions.id })),
+  //           catchError((error) => of(deleteUsersFailure({ error })))
+  //         )
+  //       ),
+  //       tap(() => this.router.navigate(['/']))
+  //     )
+  //   );
 }
