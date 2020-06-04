@@ -38,6 +38,16 @@ const _userReducer = createReducer(
       ...state,
       error: action.error,
     };
+  }),
+  // delete user
+  on(UserActions.deleteUserSuccess, (state, action) =>
+    adapter.removeOne(action.id, state)
+  ),
+  on(UserActions.deleteUsersFailure, (state, action) => {
+    return {
+      ...state,
+      error: action.error,
+    };
   })
 );
 

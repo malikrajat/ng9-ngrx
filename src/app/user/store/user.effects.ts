@@ -7,6 +7,9 @@ import {
   addUser,
   addUserSuccess,
   addUsersFailure,
+  deleteUser,
+  deleteUserSuccess,
+  deleteUsersFailure,
 } from './user.actions';
 import { mergeMap, map, catchError, tap } from 'rxjs/operators';
 import { UserService } from '../user.service';
@@ -43,6 +46,19 @@ export class UserEffects {
         )
       ),
       tap(() => this.router.navigate(['/']))
+    )
+  );
+  // delete user
+  //addUser
+  deleteUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(deleteUser),
+      mergeMap((actions) =>
+        this.userService.deleteUser(actions.id).pipe(
+          map(() => deleteUserSuccess({ id: actions.id })),
+          catchError((error) => of(deleteUsersFailure({ error })))
+        )
+      )
     )
   );
 }

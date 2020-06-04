@@ -16,14 +16,28 @@ export const loadUsersFailure = createAction(
 
 // add users
 export const addUser = createAction(
-  '[Add User component] add new users',
+  '[Add User component] add new user',
   props<{ user: User }>()
 );
 export const addUserSuccess = createAction(
-  '[Add User  Effects] Add Users success',
+  '[Add User  Effects] Add User success',
   props<{ user: User }>()
 );
 export const addUsersFailure = createAction(
-  '[Add User  Effect] Add Users Failure',
+  '[Add User  Effect] Add User Failure',
+  props<{ error: any }>()
+);
+
+// delete users
+export const deleteUser = createAction(
+  '[ User List component] Delete user',
+  props<{ id: string }>()
+);
+export const deleteUserSuccess = createAction(
+  '[Delete User  Effects] Delete User success',
+  props<{ id: string }>()
+);
+export const deleteUsersFailure = createAction(
+  '[Delete User  Effect] Delete User Failure',
   props<{ error: any }>()
 );

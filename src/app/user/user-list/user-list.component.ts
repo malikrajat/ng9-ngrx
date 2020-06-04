@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Store, select } from '@ngrx/store';
-import { loadUsers } from '../store/user.actions';
+import { loadUsers, deleteUser } from '../store/user.actions';
 import { UserState, selectAll } from '../store/user.reducer';
 import { Observable } from 'rxjs';
 import { User } from '../store/user.model';
@@ -22,8 +22,9 @@ export class UserListComponent implements OnInit {
   private loadUsers(): void {
     this.users$ = this._store.pipe(select(loadUsersList));
   }
-  public deleteUser(userId: number): void {
+  public deleteUser(id: string): void {
     if (window.confirm('Are sure you want to delete this item ?')) {
+      this._store.dispatch(deleteUser({ id }));
     }
   }
 }

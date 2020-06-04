@@ -8,7 +8,7 @@ import { User } from './store/user.model';
   providedIn: 'root',
 })
 export class UserService {
-  private _baseUrl: string = 'https://jsonplaceholder.typicode.com/users';
+  private _baseUrl: string = 'https://jsonplaceholder.typicode.com/users/';
   constructor(private _http: HttpClient) {}
 
   /**
@@ -23,6 +23,12 @@ export class UserService {
   public addUser(user: User): Observable<User> {
     return this._http
       .post<User>(this._baseUrl, user)
+      .pipe(catchError(this.handleError));
+  }
+
+  public deleteUser(id: string) {
+    return this._http
+      .delete(this._baseUrl + id)
       .pipe(catchError(this.handleError));
   }
 
