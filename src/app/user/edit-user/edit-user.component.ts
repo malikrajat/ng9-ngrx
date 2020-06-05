@@ -47,13 +47,13 @@ export class EditUserComponent implements OnInit {
         [Validators.required, Validators.email, Validators.minLength(6)],
       ],
       name: ['', [Validators.required, Validators.minLength(6)]],
-      username: ['', [Validators.required, Validators.minLength(6)]],
+      username: ['', [Validators.required, Validators.minLength(4)]],
       phone: [
         '',
         [
           Validators.required,
-          Validators.minLength(10),
-          Validators.maxLength(10),
+          // Validators.minLength(10),
+          // Validators.maxLength(10),
           // Validators.pattern('[0-9]{0-10}'),
         ],
       ],
@@ -71,8 +71,8 @@ export class EditUserComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.minLength(6),
-            Validators.maxLength(6),
+            // Validators.minLength(6),
+            // Validators.maxLength(6),
           ],
         ],
         geo: this.fb.group({
@@ -124,11 +124,11 @@ export class EditUserComponent implements OnInit {
     return this.editUser.controls;
   }
   // get form company error
-  companyValidation(formGroupName, formControlName) {
+  public companyValidation(formGroupName, formControlName) {
     return this.editUser.get(formGroupName).get(formControlName);
   }
   //get form geo error
-  geoValidation(formGroupName, formControlName, formControlNameChild) {
+  public geoValidation(formGroupName, formControlName, formControlNameChild) {
     return this.editUser
       .get(formGroupName)
       .get(formControlName)

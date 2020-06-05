@@ -79,16 +79,16 @@ export class UserEffects {
     )
   );
   //edit user
-  //   editUsers$ = createEffect(() =>
-  //     this.actions$.pipe(
-  //       ofType(editUser),
-  //       concatMap((actions) =>
-  //         this.userService.editUser(actions.user.id, actions.user.changes).pipe(
-  //           map(() => editUserSuccess({ id: actions.id })),
-  //           catchError((error) => of(deleteUsersFailure({ error })))
-  //         )
-  //       ),
-  //       tap(() => this.router.navigate(['/']))
-  //     )
-  //   );
+  editUsers$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(editUser),
+      concatMap((actions) =>
+        this.userService.editUser(actions.user.id, actions.user.changes).pipe(
+          map((user) => editUserSuccess({ user: actions.user })),
+          catchError((error) => of(deleteUsersFailure({ error })))
+        )
+      ),
+      tap(() => this.router.navigate(['/']))
+    )
+  );
 }
