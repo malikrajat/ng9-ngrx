@@ -16,20 +16,52 @@ import {
   loadUserSuccess,
   loadUserFailure,
 } from './user.actions';
-import { mergeMap, map, catchError, tap, concatMap } from 'rxjs/operators';
+import {
+  mergeMap,
+  map,
+  catchError,
+  tap,
+  concatMap,
+  withLatestFrom,
+  switchMap,
+} from 'rxjs/operators';
 import { UserService } from '../user.service';
 import { of } from 'rxjs/internal/observable/of';
 import { Router } from '@angular/router';
+import { Store, Action, select } from '@ngrx/store';
+import { UserState } from './user.reducer';
+import { loadUsersList } from './user.selectors';
+import { Observable, empty } from 'rxjs';
 
 @Injectable()
 export class UserEffects {
   constructor(
     private actions$: Actions,
     private userService: UserService,
+    private _store: Store<UserState>,
     private router: Router
   ) {}
 
-  // load user
+  // load users
+  //   loadCollection$ = createEffect(() =>
+  //     this.actions$.pipe(
+  //       ofType(loadUsers),
+  //       withLatestFrom(this._store.pipe(select(loadUsersList))),
+  //       switchMap(([, loaded]) => {
+  //         if (loaded) {
+  //           return empty();
+  //         }
+  //         return this.userService.getUsers().pipe(
+  //           map((users) => {
+  //             return loadUsersSuccess({ users });
+  //           }),
+  //           catchError((error) => of(loadUsersFailure({ error })))
+  //         );
+  //       })
+  //     )
+  //   );
+
+  //load usre
   user$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadUser),
@@ -41,7 +73,8 @@ export class UserEffects {
       )
     )
   );
-  // load users
+
+  //   load users
   users$ = createEffect(() =>
     this.actions$.pipe(
       ofType(loadUsers),
@@ -53,6 +86,7 @@ export class UserEffects {
       )
     )
   );
+
   //addUser
   addUsers$ = createEffect(() =>
     this.actions$.pipe(

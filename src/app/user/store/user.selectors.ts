@@ -9,3 +9,8 @@ export const selectedUserDetails = createSelector(
   loadUserState,
   (state: UserState) => state.selectedUser
 );
+
+export const hasLoaded = createSelector(
+  loadUserState,
+  (state: UserState) => state.hasLoaded
+);

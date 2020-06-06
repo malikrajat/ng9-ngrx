@@ -9,6 +9,7 @@ export interface UserState extends EntityState<User> {
   // additional entities state properties
   error: any;
   selectedUser: User;
+  hasLoaded: boolean;
 }
 
 export const adapter: EntityAdapter<User> = createEntityAdapter<User>();
@@ -17,6 +18,7 @@ export const initialState: UserState = adapter.getInitialState({
   // additional entity state properties
   error: undefined,
   selectedUser: undefined,
+  hasLoaded: false,
 });
 
 const _userReducer = createReducer(
@@ -37,12 +39,17 @@ const _userReducer = createReducer(
 
   // load users
   on(UserActions.loadUsersSuccess, (state, action) =>
-    adapter.addAll(action.users, state)
+    // adapter.addAll(action.users, state)
+    adapter.addAll(action.users, {
+      ...state,
+      hasLoaded: true,
+    })
   ),
   on(UserActions.loadUsersFailure, (state, action) => {
     return {
       ...state,
       error: action.error,
+      hasLoaded: true,
     };
   }),
   // add user
