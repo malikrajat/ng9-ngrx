@@ -9,13 +9,11 @@ const routes: Routes = [
   },
   {
     path: 'user',
-
     loadChildren: () =>
       import('./user/user.module').then((user) => user.UserModule),
   },
   {
     path: 'post',
-
     loadChildren: () =>
       import('./post/post.module').then((post) => post.PostModule),
   },
