@@ -6,8 +6,8 @@ import { EditPostComponent } from './edit-post/edit-post.component';
 
 const routes: Routes = [
   { path: '', component: PostListComponent },
-  { path: 'add-post', component: AddPostComponent },
-  { path: 'edit-post/:id', component: EditPostComponent },
+  { path: 'add', component: AddPostComponent },
+  { path: 'edit/:id', component: EditPostComponent },
 ];
 
 @NgModule({

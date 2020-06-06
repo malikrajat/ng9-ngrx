@@ -1,17 +1,18 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Post } from '../store/post.model';
 
 @Component({
   selector: 'app-post-list',
   templateUrl: './post-list.component.html',
-  styles: [
-  ],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.Default,
 })
 export class PostListComponent implements OnInit {
+  posts$: Observable<Post>;
+  constructor() {}
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
+  /**
+   * deletePost: void  */
+  public deletePost(id: string): void {}
 }

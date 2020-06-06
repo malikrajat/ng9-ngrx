@@ -1,1 +1,31 @@
-<p>post-list works!</p>
+<a class="btn btn-primary" routerLink="/post/add">Add New Post</a>
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Title</th>
+        <th>Body</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let post of posts$ | async">
+        <td>{{ post.id }}</td>
+        <td>{{ post.title }}</td>
+        <td>{{ post.body }}</td>
+        <td>
+          <a class="btn btn-primary" [routerLink]="['edit', post.id]">Edit</a>
+          &nbsp;&nbsp;&nbsp;
+          <button
+            type="button"
+            class="btn btn-danger"
+            (click)="deletePost(post.id)"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
