@@ -36,6 +36,15 @@ export class PostService {
       .pipe(catchError(this.handleError));
   }
 
+  /**
+   * load post
+   */
+  public getPost(id: string | number): Observable<Post> {
+    return this._http
+      .get<Post>(this._baseUrl + id)
+      .pipe(catchError(this.handleError));
+  }
+
   public editPost(
     id: string | number,
     changes: Partial<Post>

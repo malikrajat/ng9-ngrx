@@ -115,7 +115,7 @@ export class EditUserComponent implements OnInit {
     }
     const update: Update<User> = {
       id: this.userToEdit.id,
-      changes: this.userToEdit,
+      changes: this.editUser.value,
     };
     this._store.dispatch(editUser({ user: update }));
   }

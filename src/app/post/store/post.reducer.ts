@@ -65,7 +65,7 @@ export const reducer = createReducer(
   on(PostActions.loadPostSuccess, (state, action) => {
     return {
       ...state,
-      selectedUser: action.selectedPost,
+      selectedPost: action.selectedPost,
     };
   }),
   on(PostActions.loadPostFailure, (state, action) => {

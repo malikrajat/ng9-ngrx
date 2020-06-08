@@ -1,1 +1,51 @@
-<p>edit-post works!</p>
+<form
+  [formGroup]="editPost"
+  (ngSubmit)="updatePost()"
+  style="margin: 0 397px 120px;"
+>
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Title</label>
+    <input
+      type="text"
+      formControlName="title"
+      name="title"
+      class="form-control"
+      placeholder="Title"
+    />
+
+    <div
+      *ngIf="f.title.errors && (f.title.dirty || f.title.touched)"
+      class="error"
+    >
+      <div *ngIf="f.title.errors.required">title is required</div>
+      <div *ngIf="f.title.errors.minlength">
+        title must be at least 6 characters
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="formGroupExampleInput2">Body</label>
+    <textarea
+      formControlName="body"
+      name="body"
+      class="form-control"
+      placeholder="Body"
+    ></textarea>
+    <div
+      *ngIf="f.body.errors && (f.body.dirty || f.body.touched)"
+      class="error"
+    >
+      <div *ngIf="f.body.errors.required">Body is required</div>
+      <div *ngIf="f.body.errors.minlength">
+        Body must be at least 6 characters
+      </div>
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!editPost.valid">
+    Update
+  </button>
+  &nbsp;&nbsp;&nbsp;
+  <button type="reset" class="btn btn-info">Reset</button>
+</form>
